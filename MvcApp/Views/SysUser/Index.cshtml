@@ -1,0 +1,179 @@
+﻿@using MvcApp
+@using com.fxm.MVCHibernate.Domain
+@model PageList<com.fxm.MVCHibernate.Domain.SysUser>
+
+@{
+    ViewBag.Title = "用户列表";
+}
+<script type="text/javascript">
+    function ImportExcel() {
+        var file = $("#FileUpload").val();
+        if (file == "") {
+            alert("请选择需要导入的文件！");
+            return false;
+        } else {
+            var stuff = /\.[^\.]+/.exec(file);
+            if (stuff != ".xls") {
+                alert("文件类型不正确,请选择.xls文件");
+                return false;
+            } else {
+                alert("开始导入数据，请您耐心等待！");
+                return true;
+                /*
+                //文件路径
+                var filepath = "";
+                var obj = document.getElementById("FileUpload");
+                if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+                    obj.select();
+                    document.getElementById("divTemp").focus();
+                    filepath = document.selection.createRange().text;
+                }else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+                    if (obj.files) {
+                        filepath= obj.files.item(0).getAsDataURL();
+                    } 
+                } else {
+                    filepath = obj.value;
+                }
+
+                //导入
+                $.modal("<img src='../Content/Img/loading.gif' alt=''></img>");
+                $.ajax({
+                    type: "POST",
+                    url: "/SysUser/ImportExcel",
+                    data: "file=" + filepath + "",
+                    success: function (result) {
+                        alert(result + "");
+                    }
+                });
+                 $.modal.close(); 
+                */
+            }
+        }
+    }
+</script>
+
+<form id="form1" name="form1" enctype="multipart/form-data" method="post" action="/SysUser/ImportExcel">
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                用户列表
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <div id="divTemp" style="width: 1px; height: 1px;"></div>
+                <input id="FileUpload" type="file" name="FileUpload" style="width:250px;background:White" />
+                <input type="submit" value="导入" onclick="return ImportExcel();" class="btn3" />
+                <input type="button" value="新增" class="btn3" onclick="window.location='/SysUser/Create'" />
+                工号: @Html.TextBox("JobNumber")<input type="submit" value="查询" class="btn3" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                    <tr>
+                        <th>
+                            姓名
+                        </th>
+                        <th>
+                            登录账户
+                        </th>
+                        <th>
+                            电话
+                        </th>
+                        <th>
+                            角色
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="6">
+                                没有满足条件的数据！
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoginCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tel)
+                                </td>
+                                <td>
+                                    @if (item.SysRoleList == null || item.SysRoleList.Count == 0)
+                                    {
+                                        <span>没有配置</span>
+                                    }
+                                    else
+                                    {
+                                        for (int i = 0; i < item.SysRoleList.Count; i++)
+                                        {
+                                            @item.SysRoleList[i].Name
+                                            if (i < item.SysRoleList.Count - 1)
+                                            {
+                                                @: ,
+                                            }
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Status == 1)
+                                    {
+                                        @: <span>停用</span>
+                                    }
+                                    else
+                                    {
+                                        @: <span>正常</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细信息", "Details", new { id = item.ID })|
+                                    @Html.ActionLink("修改", "Edit", new { id = item.ID }) |
+                                    @if (item.Status == 0)
+                                    {
+                                        @Html.ActionLink("停用", "SwitchStatus", new { id = item.ID }, new { onclick = "return confirm('真的打算停用吗?')" });
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("启用", "SwitchStatus", new { id = item.ID }, new { onclick = "return confirm('真的打算启用吗?')" });
+                                    }
+                                    |
+                                    @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { onclick = " return confirm('您确定要删除吗?'); " })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pager">
+                    @Html.Raw(Html.Pager(Model.PageIndex, Model.PageSize, Model.TotalCount, Model.PageIndex))
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+
+
+

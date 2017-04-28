@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1E7A84CB-9195-483A-BD08-14D9E515A37C}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvcApp</RootNamespace>
+    <AssemblyName>MvcApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.ActiveRecord">
+      <HintPath>..\Libs\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\Libs\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator">
+      <HintPath>..\Libs\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\Libs\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.ActiveRecordIntegration">
+      <HintPath>..\Libs\Castle.Facilities.ActiveRecordIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.AutoTx">
+      <HintPath>..\Libs\Castle.Facilities.AutoTx.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Transaction">
+      <HintPath>..\Libs\Castle.Services.Transaction.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\Libs\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\Libs\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NHibernate">
+      <HintPath>..\Libs\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\Libs\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Search">
+      <HintPath>..\Libs\NHibernate.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppHelper.cs" />
+    <Compile Include="CheckBoxListHelper.cs" />
+    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarLineController.cs" />
+    <Compile Include="Controllers\CarLineStationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderSeatRecController.cs" />
+    <Compile Include="Controllers\SysMenuController.cs" />
+    <Compile Include="Controllers\SysRoleController.cs" />
+    <Compile Include="Controllers\SysUserController.cs" />
+    <Compile Include="Controllers\UcController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInitDB.aspx.cs">
+      <DependentUpon>FrmInitDB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmInitDB.aspx.designer.cs">
+      <DependentUpon>FrmInitDB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="PageList.cs" />
+    <Compile Include="PagerHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadioButtonListHelper.cs" />
+    <Compile Include="RenderPager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Config\ServiceConfig.xml" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap35\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\bootstrap35\js\bootstrap.js" />
+    <Content Include="Content\css\bootstrap35\js\bootstrap.min.js" />
+    <Content Include="Content\css\bootstrap35\js\npm.js" />
+    <Content Include="Content\css\custom-media.css" />
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\Img\btnOk.png" />
+    <Content Include="Content\Img\btnClose.png" />
+    <Content Include="Content\Img\calendar.gif" />
+    <Content Include="Content\Img\csh_bluebooks\blank.gif" />
+    <Content Include="Content\Img\csh_bluebooks\book.gif" />
+    <Content Include="Content\Img\csh_bluebooks\book_titel.gif" />
+    <Content Include="Content\Img\csh_bluebooks\but_cut.gif" />
+    <Content Include="Content\Img\csh_bluebooks\close2.gif" />
+    <Content Include="Content\Img\csh_bluebooks\folderClosed.gif" />
+    <Content Include="Content\Img\csh_bluebooks\folderOpen.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconCheckAll.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconCheckDis.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconChecked.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconCheckGray.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconSafe.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconText.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconUncheckAll.gif" />
+    <Content Include="Content\Img\csh_bluebooks\iconUncheckDis.gif" />
+    <Content Include="Content\Img\csh_bluebooks\leaf.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line1.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line1_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line2.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line2_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line3.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line3_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line4.gif" />
+    <Content Include="Content\Img\csh_bluebooks\line4_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\lock.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus1.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus2.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus2_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus3.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus3_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus4.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus4_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus5.gif" />
+    <Content Include="Content\Img\csh_bluebooks\minus5_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus1.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus2.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus2_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus3.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus3_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus4.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus4_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus5.gif" />
+    <Content Include="Content\Img\csh_bluebooks\plus5_rtl.gif" />
+    <Content Include="Content\Img\csh_bluebooks\radio_off.gif" />
+    <Content Include="Content\Img\csh_bluebooks\radio_on.gif" />
+    <Content Include="Content\Img\csh_bluebooks\tombs.gif" />
+    <Content Include="Content\Img\header_logo.png" />
+    <Content Include="Content\Img\header_power.png" />
+    <Content Include="Content\Img\left_nav.png" />
+    <Content Include="Content\Img\loading.gif" />
+    <Content Include="Content\Img\login_left.png" />
+    <Content Include="Content\Img\login_title.png" />
+    <Content Include="Content\Img\login_bg.png" />
+    <Content Include="Content\Img\x.png" />
+    <Content Include="Content\Img\carhk.png" />
+    <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\ie8\html5shiv.min.js" />
+    <Content Include="Content\js\ie8\respond.min.js" />
+    <Content Include="Content\js\jquery-1.12.4.min.js" />
+    <Content Include="Content\js\jquery.mobile.custom.min.js" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\menu.xml" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\ViewPage.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="FrmInitDB.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap35\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap35\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\css\bootstrap35\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\css\bootstrap35\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\bootstrap35\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
+    <None Include="Scripts\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\dhtmlxcommon.js" />
+    <Content Include="Scripts\dhtmlxtree.js" />
+    <Content Include="Scripts\ext\demo.js" />
+    <Content Include="Scripts\ext\dhtmlxtree_dragin.js" />
+    <Content Include="Scripts\ext\dhtmlxtree_ed.js" />
+    <Content Include="Scripts\ext\dhtmlxtree_er.js" />
+    <Content Include="Scripts\ext\dhtmlxtree_json.js" />
+    <Content Include="Scripts\ext\dhtmlxtree_start.js" />
+    <Content Include="Scripts\ext\jquery.cookie.js" />
+    <Content Include="Scripts\ext\jquery.treeview.js" />
+    <Content Include="Scripts\jquery-1.5.1.js" />
+    <Content Include="Scripts\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.easyui.min.js" />
+    <Content Include="Scripts\jquery.jqprint.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.simplemodal.1.4.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.ztree.core-3.5.js" />
+    <Content Include="Scripts\jquery.ztree.exedit-3.5.js" />
+    <Content Include="Scripts\jquery.ztree.exhide-3.5.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\SysUser\ChangePassword.cshtml" />
+    <Content Include="Views\OrderSeatRec\OrderSeat_old.cshtml" />
+    <Content Include="Views\OrderSeatRec\QryPersonal.cshtml" />
+    <Content Include="Views\SysUser\Index.cshtml" />
+    <Content Include="Views\SysUser\Details.cshtml" />
+    <Content Include="Views\SysUser\Create.cshtml" />
+    <Content Include="Views\SysUser\Edit.cshtml" />
+    <Content Include="Views\SysRole\Index.cshtml" />
+    <Content Include="Views\SysRole\Create.cshtml" />
+    <Content Include="Views\SysRole\Edit.cshtml" />
+    <Content Include="Views\SysRole\Details.cshtml" />
+    <Content Include="Views\SysMenu\Index.cshtml" />
+    <Content Include="Views\Car\Index.cshtml" />
+    <Content Include="Views\Car\Details.cshtml" />
+    <Content Include="Views\Car\Edit.cshtml" />
+    <Content Include="Views\Car\Create.cshtml" />
+    <Content Include="Views\CarLine\Index.cshtml" />
+    <Content Include="Views\CarLine\Details.cshtml" />
+    <Content Include="Views\CarLine\Create.cshtml" />
+    <Content Include="Views\CarLine\Edit.cshtml" />
+    <Content Include="Views\CarLineStation\Index.cshtml" />
+    <Content Include="Views\CarLineStation\Details.cshtml" />
+    <Content Include="Views\CarLineStation\Create.cshtml" />
+    <Content Include="Views\CarLineStation\Edit.cshtml" />
+    <Content Include="Views\OrderSeatRec\Index.cshtml" />
+    <Content Include="Views\OrderSeatRec\OrderSeatDriver.cshtml" />
+    <Content Include="Views\OrderSeatRec\QryPersonalDriver.cshtml" />
+    <Content Include="Views\Shared\_LayoutMobile.cshtml" />
+    <Content Include="Views\SysUser\LoginMobile.cshtml" />
+    <Content Include="Views\SysUser\ChangePasswordMobile.cshtml" />
+    <Content Include="Views\Home\IndexMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\OrderSeatMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\QryPersonalMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\QryPersonalDriverMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\OrderSeatDriverMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\CarListForOrder.cshtml" />
+    <Content Include="Views\OrderSeatRec\LineListForOrder.cshtml" />
+    <Content Include="Views\OrderSeatRec\OrderSeat.cshtml" />
+    <Content Include="Views\OrderSeatRec\CarListForOrderMobile.cshtml" />
+    <Content Include="Views\OrderSeatRec\LineListForOrderMobile.cshtml" />
+    <Content Include="Views\Home\IndexDriverMobile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\images\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Component\Component.csproj">
+      <Project>{4361df4f-6f11-4201-8281-b288bb299eac}</Project>
+      <Name>Component</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{42b9bc0c-f12a-44ca-af13-f7d19a7590e3}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{9c8ca972-2e78-48b4-bd4e-8f751e672b81}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manager\Manager.csproj">
+      <Project>{07e6def4-7138-45d2-b341-159eac2348fb}</Project>
+      <Name>Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{79dd8350-6da1-4160-954b-49555b95074d}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysUser\Login.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1752</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1752/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

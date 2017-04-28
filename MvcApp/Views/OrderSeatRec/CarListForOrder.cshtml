@@ -1,0 +1,45 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.Car>
+@using com.fxm.MVCHibernate.Domain
+@{
+    ViewBag.Title = "订座-班车列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IList<CarLine> carLineList = ViewBag.carLineList as IList<CarLine>;
+    IList<CarLineStation> carLineStationList = ViewBag.carLineStationList as IList<CarLineStation>;
+}
+
+<table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">班车列表</td>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td>无班车</td>
+        </tr>
+    }
+    <tr>
+        <td>
+            @foreach (var item in Model)
+            {
+                IList<CarLine> lstLine = carLineList.Where(m => m.Car.ID == item.ID).ToList();
+                    <fieldset>
+                        <legend></legend>
+                        <div class="display-label">@item.Name</div>
+                        <div class="display-field">@Html.ActionLink("查看线路", "LineListForOrder", new { carId = item.ID }, new { @class = "btn3" })</div>
+                        @foreach (var line in lstLine)
+                        {
+                            IList<CarLineStation> lstStation = carLineStationList.Where(m => m.CarLine.ID == line.ID).OrderBy(m => m.ArrivalTime).ToList();
+                            <div class="display-label">@line.Name</div>
+                            <div class="display-field">
+                                @lstStation[0].Name - @lstStation[lstStation.Count - 1].Name
+                                (
+                                @lstStation[0].ArrivalTime - @lstStation[lstStation.Count - 1].ArrivalTime
+                                )
+                            </div>
+                        }
+                    </fieldset>
+            }
+        </td>
+    </tr>
+</table>
+

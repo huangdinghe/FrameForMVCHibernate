@@ -1,0 +1,79 @@
+﻿@model com.fxm.MVCHibernate.Domain.SysUser
+@{
+    ViewBag.Title = "修改用户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+<script language="javascript" type="text/jscript">
+    function GetIDs() {
+        var Ids = "";
+        $("input[name='checkbox']['checked']").each(function () {
+            var chk = $(this);
+            if (chk.attr("checked")) {
+                Ids += chk.val() + ",";
+            }
+        })
+        $("#roleIDs").val(Ids);
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.Hidden("roleIDs")
+    @Html.HiddenFor(model => model.ID)
+    @Html.ValidationSummary(true)
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style=" text-align:center;vertical-align:middle">
+                编辑用户信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location='/SysUser/Index?pageIndex=1'" />
+                <input type="submit" value="保存" class="btn3" onclick="GetIDs()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fieldset>
+                    <legend>用户信息</legend>
+                    <div class="editor-label">
+                        用户名
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                    <div class="editor-label">
+                        登录账户
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.LoginCode)
+                        @Html.ValidationMessageFor(model => model.LoginCode)
+                    </div>
+                    <div class="editor-label">
+                        电话
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Tel)
+                        @Html.ValidationMessageFor(model => model.Tel)
+                    </div>
+                    <div class="editor-label">
+                        状态
+                    </div>
+                    <div class="editor-field">
+                       @Html.RadioButtonList("Status", ViewBag.statusItems as List<SelectListItem>)
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>设置隶属角色</legend>
+                    @Html.CheckBoxList("checkbox", (IEnumerable<SelectListItem>)ViewBag.cblItems)
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+}

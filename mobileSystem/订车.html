@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1,user-scalable=no"/>
+<title>web1</title> 
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap35/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="css/custom-media.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]> 
+  <script src="js/ie8/html5shiv.min.js"></script>
+  <script src="js/ie8/respond.min.js"></script>
+<![endif]--> 
+
+</head> 
+<body>
+
+<!-- 导航 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重庆惠科班车订座系统 </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">订座</a></li>
+                <li><a href="#">我的乘车记录</a></li>
+                <li><a href="#">更改密码</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航 end -->
+
+<!-- 占位空间 -->
+<div class="zhanwei"></div>
+<!-- 占位空间 end -->
+
+<!-- 面包屑导航 -->
+<div class="container-fluid nowp">
+        <span class="glyphicon glyphicon-home"></span>
+        <a href="#">首页</a>
+        /
+        <a href="">订座</a>
+</div>
+<!-- 面包屑导航 end -->
+<!-- 内容部分 -->
+<div class="container-fluid">
+    <!-- 订座信息 -->
+    <div class="dingzuo">
+        <h2><span>2016-10-12</span>您的订座</h2>
+        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="30%" valign="top">班车：</td>
+                <td align="left" valign="top">1号交通车</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top">车牌号：</td>
+                <td align="left" valign="top">渝BXX123</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top">线路说明：</td>
+                <td align="left" valign="top">线路说明线路说明线路说明线路说明</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top">停靠站：</td>
+                <td align="left" valign="top">
+                    <ul class="banche_add">
+                        <li><span>18:00</span>花溪</li>
+                        <li><span>18:00</span>九公里</li>
+                        <li><span>18:00</span>四公里</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <a href="#" class="btn btn-block btn-success">退订</a>
+        </div>
+    </div>
+    <!-- 订座信息 end -->
+
+    <!-- 订座信息 -->
+    <div class="dingzuo">
+        <h2><span>2016-10-12</span>班车信息</h2>
+        <div class="alert alert-info xinxi">
+            <div class="xx xinxi_x">班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息班车信息</div>
+            <span id="xiangxi">详细 <span class="glyphicon glyphicon-chevron-down"></span></span>
+            <span id="shouqi" class="d_n">收起 <span class="glyphicon glyphicon-chevron-up"></span></span>
+        </div>
+        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="2" align="center">
+                    司机位置
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">01</span>
+                    <a href="#" class="btn btn-primary btn-sm">订座</a>
+                </td>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">02</span>
+                    <span class="btn btn-default btn-sm">已定</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">01</span>
+                    <a href="#" class="btn btn-primary btn-sm">订座</a>
+                </td>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">02</span>
+                    <span class="btn btn-default btn-sm">已定</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">03</span>
+                    <a href="#" class="btn btn-primary btn-sm">订座</a>
+                </td>
+                <td width="50%" valign="top" align="center">
+                    <span class="zuowei">04</span>
+                    <span class="btn btn-default btn-sm">已定</span>
+                </td>
+            </tr>
+
+        </table>
+        <div class="text-center">
+            <a href="#" class="btn btn-block btn-success">退订</a>
+        </div>
+    </div>
+    <!-- 订座信息 end -->
+</div>
+<!-- 内容部分 end -->
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="css/bootstrap35/js/bootstrap.min.js"></script> 
+<script src="js/custom.js"></script>
+</body>
+</html>

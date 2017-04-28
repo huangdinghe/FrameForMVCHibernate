@@ -1,0 +1,156 @@
+﻿@using MvcApp
+@using com.fxm.MVCHibernate.Domain
+@model PageList<com.fxm.MVCHibernate.Domain.OrderSeatRec>
+
+@{
+    ViewBag.Title = "订座列表";
+}
+<script src="~/Scripts/jquery-ui-1.8.11.min.js"></script>
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $("#StartDate").datepicker({
+            dateFormat: 'yy-mm-dd', //日期格式
+            buttonImage: '../../Content/Img/calendar.gif', //按钮的图片路径
+            buttonImageOnly: true, //Show an image trigger without any button.
+            showOn: 'both', //触发条件，both表示点击文本域和图片按钮都生效
+            yearRange: '1990:2008', //年份范围
+            clearText: '清除',
+            closeText: '关闭',
+            prevText: '上月',
+            nextText: '下月',
+            currentText: ' ',
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+        });
+        $("#EndDate").datepicker({
+            dateFormat: 'yy-mm-dd', //日期格式
+            buttonImage: '../../Content/Img/calendar.gif', //按钮的图片路径
+            buttonImageOnly: true, //Show an image trigger without any button.
+            showOn: 'both', //触发条件，both表示点击文本域和图片按钮都生效
+            yearRange: '1990:2008', //年份范围
+            clearText: '清除',
+            closeText: '关闭',
+            prevText: '上月',
+            nextText: '下月',
+            currentText: ' ',
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+        });
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                订座列表
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                工号: @Html.TextBox("JobNumber")
+                班车: @Html.DropDownList("CarId", ViewBag.carItems as List<SelectListItem>)
+                发车日期：@Html.TextBox("StartDate", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")) 至 
+                          @Html.TextBox("EndDate", DateTime.Now.ToString("yyyy-MM-dd"))
+                <input type="submit" value="查询" class="btn3" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                    <tr>
+                        <th>
+                            班车
+                        </th>
+                        <th>
+                            线路
+                        </th>
+                        <th>
+                            班车日期
+                        </th>
+                        <th>
+                            班别
+                        </th>
+                        <th>
+                            发车时间
+                        </th>
+                        <th>
+                            订座人
+                        </th>
+                        <th>
+                            订座时间
+                        </th>
+                        <th>
+                            座号
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="9">
+                                没有满足条件的数据！
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Car.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CarLine.Name)
+                                </td>
+                                <td>
+                                    @item.CarDate.ToString("yyyy-MM-dd")
+                                </td>
+                                <td>
+                                    @if (item.Shift == 1)
+                                    {
+                                        @: <span>早班</span>
+                                    }
+                                    else
+                                    {
+                                        @: <span>晚班</span>
+                                    }
+                                </td>
+                                <td>
+                                    @item.StartTime.ToString("yyyy-MM-dd HH:mm")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderPerson.Name)
+                                </td>
+                                <td>
+                                    @item.OrderTime.ToString("yyyy-MM-dd HH:mm")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SeatNumber)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { onclick = " return confirm('您确定要删除吗?'); " })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pager">
+                    @Html.Raw(Html.Pager(Model.PageIndex, Model.PageSize, Model.TotalCount, Model.PageIndex))
+                </div>
+            </td>
+        </tr>
+    </table>
+}

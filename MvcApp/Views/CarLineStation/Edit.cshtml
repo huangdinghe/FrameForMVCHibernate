@@ -1,0 +1,77 @@
+﻿@model com.fxm.MVCHibernate.Domain.CarLineStation
+
+@{
+    ViewBag.Title = "修改班车线路停靠站";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.ValidationSummary(true)
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style=" text-align:center;vertical-align:middle">
+                编辑班车线路停靠站信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location = '/CarLineStation/Index?pageIndex=1'" />
+                <input type="submit" value="保存" class="btn3" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fieldset>
+                    <legend>班车线路停靠站</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.CarLine)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownListFor(model => model.CarLine.ID, ViewBag.carLineItems as List<SelectListItem>)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Name)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.ArrivalTime)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.ArrivalTime)
+                                    @Html.ValidationMessageFor(model => model.ArrivalTime)
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+}

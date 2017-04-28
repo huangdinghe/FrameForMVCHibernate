@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1,user-scalable=no"/>
+<title>web1</title> 
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap35/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="css/custom-media.css">
+    <script type="text/javascript">
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+                //pc端页面地址
+                window.location.href = 'http://www.baidu.com';
+            }
+        }
+
+        browserRedirect();
+    </script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]> 
+  <script src="js/ie8/html5shiv.min.js"></script>
+  <script src="js/ie8/respond.min.js"></script>
+<![endif]--> 
+
+</head> 
+<body>
+ 
+<div class="login_container">
+  <div class="login_body">
+
+      <div class="login_title1">
+        重庆惠科
+      </div>
+      <h1 class="login_title">
+        班车订座系统 <span>LOGIN</span>
+      </h1>
+      <p class="login_title_p">
+        Dear user, log in to access the admin area!
+      </p>
+      <form action="">
+        <div class="form-group">
+          <input type="text" placeholder="工号" class="form-control input-lg" name="username" id="username" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="密码" class="form-control input-lg" name="passwd" id="passwd" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="登 录" class="btn btn-block btn-lg btn-success">
+        </div>
+      </form>
+  </div>
+  <p class="text-center login_copy">
+    重庆惠科·版权所有
+    <br>
+    重庆市巴南区界石镇数码产业园
+  </p>
+</div>
+  
+
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="css/bootstrap35/js/bootstrap.min.js"></script> 
+<script src="js/custom.js"></script>
+</body>
+</html>

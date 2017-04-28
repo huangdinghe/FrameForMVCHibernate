@@ -1,0 +1,153 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.CarLine>
+@using com.fxm.MVCHibernate.Domain
+@{
+    ViewBag.Title = "OrderSeat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    DateTime carDate = ViewBag.carDate;
+    string msg = ViewBag.msg;
+    IList<OrderSeatRec> hisOrderSeatRec = ViewBag.hisOrderSeatRec as IList<OrderSeatRec>;
+
+    IList<OrderSeatRec> personal = hisOrderSeatRec.Where(o => o.OrderPerson.ID == MvcApp.AppHelper.LoginedUser.ID).ToList();
+}
+@if (msg.Length > 0)
+{
+    <script>
+        alert('@msg ');
+    </script>
+}
+<table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 30%; border: 0;">
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">@carDate.ToString("yyyy-MM-dd")您的订座</td>
+    </tr>
+    <tr>
+        <td class="titleContentDivider"></td>
+    </tr>
+    <tr>
+        
+            @if (personal.Count == 0)
+            {
+                <td align="center">(无)</td>
+            }
+            else
+            {
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                        @foreach (var m in personal)
+                        {
+                            <tr>
+                                <td>班车</td>
+                                <td align="left" colspan="2">@m.Car.Name</td>
+                            </tr>
+                            <tr>
+                                <td>车牌号</td>
+                                <td align="left" colspan="2">@m.Car.PlateNumber</td>
+                            </tr>
+                            <tr>
+                                <td>司机</td>
+                                <td align="left" colspan="2">@m.DriverName</td>
+                            </tr>
+                            <tr>
+                                <td>司机电话</td>
+                                <td align="left" colspan="2">@m.DriverTel</td>
+                            </tr>
+                            <tr>
+                                <td>线路</td>
+                                <td align="left" colspan="2">@m.CarLine.Name</td>
+                            </tr>
+                            <tr>
+                                <td>线路说明</td>
+                                <td align="left" colspan="2">@m.CarLine.Remark</td>
+                            </tr>
+                            <tr>
+                                <td>发车时间</td>
+                                <td align="left" colspan="2">@m.CarLine.CarLineStartTime</td>
+                            </tr>
+                            <tr>
+                                <td>座号</td>
+                                <td>第 @m.SeatNumber 号座</td>
+                            </tr>
+                            <tr>
+                                <td>停靠站</td>
+                                <td>
+                                    @foreach (var station in m.CarLine.CarLineStationList.OrderBy(o => o.ArrivalTime).ToList())
+                                    {
+                                        <table>
+                                            <tr>
+                                                <td width="40">@station.ArrivalTime</td>
+                                                <td>@station.Name</td>
+                                            </tr>
+                                        </table>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">@Html.ActionLink("退订", "UnOrder", new { id = m.ID, StartTime = m.StartTime }, new { onclick = "return confirm('真的打算退订吗?')", @class = "btn3" })</td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            }
+    </tr>
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">@carDate.ToString("yyyy-MM-dd")班车信息</td>
+    </tr>
+    <tr>    
+        <td>
+        <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+            @foreach (var item in Model)
+            {
+                int quote = item.Car.SeatCount / 2;
+                int seatRows = (item.Car.SeatCount % 2) == 0 ? quote + 1 : quote + 2;
+                <tr>
+                    <td rowspan="@seatRows">
+                        班车:@item.Car.Name
+                        <br />
+                        车牌:@item.Car.PlateNumber
+                        <br />
+                        线路:@item.Name
+                        <br />
+                        说明:@item.Remark
+                        <br />
+                        发车:@item.CarLineStartTime
+                        已订：@hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID).Count() 座
+                    </td>
+                    <td colspan="2">司机座位</td>
+                </tr>
+                for (int i = 1; i <= item.Car.SeatCount; i = i + 2)
+                {
+                    <tr>
+                        @for (int col = 0; col <= 1; col++)
+                        {
+                            int seatnumber = col + i;
+                            if (seatnumber <= item.Car.SeatCount)
+                            {
+                                List<OrderSeatRec> lst = hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID && o.SeatNumber == seatnumber).ToList();
+                                if (lst.Count > 0)
+                                {
+                                    <td>
+                                        @seatnumber.ToString("00")
+                                        @lst[0].OrderPerson.LoginCode
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @seatnumber.ToString("00")
+                                        @Html.ActionLink("订座", "Order", new { id = item.ID, seatNumber = seatnumber, carId = item.Car.ID, carDate = carDate, carLineStartTime = item.CarLineStartTime, shift = item.Shift }, new { @class = "btn3" })
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td>&nbsp;</td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </table>
+            </td>
+        </tr>
+    </table>
+

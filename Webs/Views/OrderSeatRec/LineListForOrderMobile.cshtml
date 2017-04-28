@@ -1,0 +1,167 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.CarLine>
+
+@{
+    ViewBag.Title = "订座-线路列表(手机版)";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+<!-- 导航 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重庆惠科金渝光电班车订座系统 </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/IndexMobile">首页</a></li>
+                <li class="active"><a href="/OrderSeatRec/CarListForOrder">订座</a></li>
+                <li><a href="/OrderSeatRec/QryPersonal">我的乘车记录</a></li>
+                <li><a href="/SysUser/ChangePassword">更改密码</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航 end -->
+<!-- 占位空间 -->
+<div class="zhanwei"></div>
+<!-- 占位空间 end -->
+<!-- 面包屑导航 -->
+<div class="container-fluid nowp">
+    <a href="/Home/IndexMobile">首页</a>
+    <a href="/OrderSeatRec/CarListForOrder">订座</a>
+    <a href="/OrderSeatRec/QryPersonal">我的乘车记录</a>
+    <a href="/SysUser/ChangePassword">更改密码</a>
+</div>
+<!-- 面包屑导航 end -->
+<!-- 内容部分 -->
+<div class="container-fluid">
+    <div class="dingzuo">
+        <h2>线路列表</h2>
+        <div class="alert alert-info xinxi">
+            <div class="xx xinxi_x" style="height:100%">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="30%" valign="top">
+                                    <span class="zuowei">@item.Car.Name </span>
+                                </td>
+                                <td align="left" valign="top">
+                                    <span class="zuowei">@item.Name</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <span class="zuowei">线路说明</span>
+                                </td>
+                                <td align="left" valign="top">
+                                    <span class="zuowei">@item.Remark</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <span class="zuowei">班次</span>
+                                </td>
+                                <td align="left" valign="top">
+                                    <span class="zuowei">
+                                        @if (item.Shift == 1)
+                                        {
+                                            <span>早班</span>
+                                        }
+                                        else
+                                        {
+                                            <span>晚班</span>
+                                        }
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <span class="zuowei">发车时间</span>
+                                </td>
+                                <td align="left" valign="top">
+                                    <span class="zuowei">@item.CarLineStartTime</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="middle">
+                                    <span class="zuowei">停靠站</span>
+                                </td>
+                                <td align="left" valign="top">
+                                    <table border="1">
+                                        @foreach (var station in item.CarLineStationList.OrderBy(o => o.ArrivalTime).ToList())
+                                        {
+                                            <tr>
+                                                <td>@station.ArrivalTime</td>
+                                                <td>@station.Name</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <span class="zuowei">&nbsp;</span>
+                                </td>
+                                <td align="left" valign="top">
+                                    @{
+                                        Type type = item.GetType();
+                                        System.Reflection.PropertyInfo propertyInfo = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today));
+                                        int val = (int)propertyInfo.GetValue(item, null);
+                                        if (val == 0)
+                                        {
+                                            <span>今日不发车</span>
+                                        }
+                                        else
+                                        {
+                                            if (DateTime.Now > Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd") + " " + item.CarLineStartTime))
+                                            {
+                                                <span>今日已发车</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@Html.ActionLink("订今日座", "OrderSeat", new { date = DateTime.Today, lineId = item.ID }, new { @class = "btn btn-primary btn-sm" })</span>
+                                            }
+                                        }
+                                        propertyInfo = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today.AddDays(1)));
+                                        val = (int)propertyInfo.GetValue(item, null);
+                                        if (val == 0)
+                                        {
+                                            <span>明日不发车</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@Html.ActionLink("订明日座", "OrderSeat", new { date = DateTime.Today.AddDays(1), lineId = item.ID }, new { @class = "btn btn-primary btn-sm" })</span>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                }
+                else
+                {
+                    @: （无）
+                }
+            </div>
+        </div>
+
+        <div class="text-center">
+            <p class="text-center login_copy">
+                重庆工程学院·版权所有
+                <br>
+                重庆惠科金渝光电 重庆市巴南区界石镇数码产业园
+            </p>
+        </div>
+    </div>
+</div>
+<!-- 内容部分 end -->

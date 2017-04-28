@@ -1,0 +1,125 @@
+﻿@using com.fxm.MVCHibernate.Domain
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {//页面加载后执行
+        setSecreenSize(); //调整页面
+        window.onresize = function () {
+            setSecreenSize();
+        };  //屏幕大小改变时调整页面
+        $("#divSubMenu .s4_left_m1").click(function () {
+            $("#divSubMenu .s4_left_m1").removeClass("current");
+            $("#divSubMenu ol").hide();
+            $(this).addClass("current");
+            $(this).next("ol").show();
+        });
+        $("#divSubMenu .s4_left_m1").eq(0).addClass("current");
+        $("#divSubMenu ol").eq(0).show();
+        $("#divSubMenu  ol a").click(function () {
+            $("#divSubMenu  ol a").removeClass("current");
+            $(this).addClass("current");
+        });
+    });
+    function setSecreenSize() {//调整页面
+        var screenHeight = getTotalHeight(); //获取浏览器可显示内容的高度
+
+        var readerDivHeight = screenHeight - 65 - 30; //计算用于显示子页面(或左边菜单栏)的高度,65:顶部div的高度;30:底部的高度
+        $("#divSubMenu").css("height", readerDivHeight); //设置左边菜单栏的高度
+        $("#divContentPage").css("height", readerDivHeight - 20);
+        $("#frameContentPage").css("height", readerDivHeight - 30);
+
+        var screenWidth = getTotalWidth(); //获取浏览器可显示内容的宽度
+        var divSubMenuWidth = $("#divSubMenu").width(); //获取左边菜单的宽度
+        var divContentPageWidth = screenWidth - divSubMenuWidth - 20; //计算显示子页面的宽度,20:解决ie9浏览器padding的bug
+        $("#divContentPage").width(divContentPageWidth - 40); //设置显示子页面的宽度
+        $("#frameContentPage").width(divContentPageWidth - 40);
+    }
+
+    function getTotalHeight() {//获取浏览器可用于显示页面的高度
+        if ($.browser.msie) {//如果浏览器是IE
+            //如果是兼容性模式则用document.documentElement.clientHeight试获取
+            return document.compatMode == "CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight;
+        } else {//其它浏览器
+            return self.innerHeight;
+        }
+    }
+
+    function getTotalWidth() {//获取浏览器可用于显示页面的宽度
+        if ($.browser.msie) {//如果浏览器是IE
+            //如果是兼容性模式则用document.documentElement.clientWidth
+            return document.compatMode == "CSS1Compat" ? document.documentElement.clientWidth : document.body.clientWidth;
+        } else {//其它浏览器
+            return self.innerWidth;
+        }
+    }
+</script>
+
+<div class="page">
+    <div>
+        <!--修改的头部 原头部，后面的注释，可以删除-->
+        <div class="s4_header">
+            <h1 class="s4_fl s4_s_logo"><img src="@Url.Content("/Content/Img/header_logo.png")" alt="" /></h1>
+            <p class="s4_fr s4_right">
+                    欢迎:<font color="blue" >@MvcApp.AppHelper.LoginedUser.Name </font>进入系统
+                    <a class="s4_header_quit" href="@Url.Content("~/SysUser/ExitLogin")" onclick="return confirm('你确定要退出登录吗')">
+                        退出登录
+                    </a>
+            </p>
+           
+        </div>
+
+    </div>
+    <div id="divCenter">
+        <table style="width: 100%; border: 0;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign="top" bgcolor="#f0f0f0" width="150" style="border-right:1px #157fa8 solid">
+                    <div id="divSubMenu" class="divSubMenu">
+                        <ul>
+                            @{
+                                var mMemuList = MvcApp.AppHelper.Privileges.Where(m => m.ParentMenu == null).OrderBy(m => m.SortCode).ToList();
+                                foreach (SysMenu mMenu in mMemuList)
+                                {
+                                    <li>
+                                        @if (mMenu.ActionName.IsEmpty())
+                                        {
+                                            <a class="s4_left_m1" href="javascript:void(0)" target="frameContentPage">@mMenu.Name</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="s4_left_m1" href="/@mMenu.ControllerName/@mMenu.ActionName" target="frameContentPage">@mMenu.Name</a>
+                                        }
+
+                                        <ol>
+
+                                        @{
+                                            var subMenuList = MvcApp.AppHelper.Privileges.Where(m => m.ParentMenu == mMenu).OrderBy(m => m.SortCode).ToList();
+                                        foreach (SysMenu subMenu in subMenuList)
+                                        {
+                                            <li><a href="/@subMenu.ControllerName/@subMenu.ActionName" target="frameContentPage">@subMenu.Name</a></li>
+                                        }
+                                            }
+
+                                        </ol>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="divContentPage">
+                        <iframe id="frameContentPage" name="frameContentPage" frameborder="0"></iframe>
+                    </div>
+
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div id="divFooter">
+        <div>
+            © 重庆惠科金渝光电 渝ICP备16008032号 重庆市巴南区界石镇数码产业园 电话：023-81158888 传真：023-81158888
+        </div>
+    </div>
+</div>

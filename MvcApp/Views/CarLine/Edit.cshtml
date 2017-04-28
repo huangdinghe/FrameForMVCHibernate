@@ -1,0 +1,285 @@
+﻿@model com.fxm.MVCHibernate.Domain.CarLine
+
+@{
+    ViewBag.Title = "修改班车线路";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.ValidationSummary(true)
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style=" text-align:center;vertical-align:middle">
+                编辑班车线路信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location='/CarLine/Index?pageIndex=1'" />
+                <input type="submit" value="保存" class="btn3" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fieldset>
+                    <legend>班车线路</legend>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Car)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownListFor(model => model.Car.ID, ViewBag.carItems as List<SelectListItem>)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Name)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Remark)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.Remark)
+                                    @Html.ValidationMessageFor(model => model.Remark)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.CarLineStartTime)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.CarLineStartTime)
+                                    @Html.ValidationMessageFor(model => model.CarLineStartTime)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Shift)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Shift", ViewBag.shiftItems as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Shift)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Sunday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Sunday1", ViewBag.sunday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Sunday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Monday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Monday1", ViewBag.monday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Monday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Tuesday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Tuesday1", ViewBag.tuesday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Tuesday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Wednesday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Wednesday1", ViewBag.wednesday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Wednesday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Thursday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Thursday1", ViewBag.thursday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Thursday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Friday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Friday1", ViewBag.friday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Friday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Saturday1)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Saturday1", ViewBag.saturday1Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Saturday1)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Sunday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Sunday2", ViewBag.sunday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Sunday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Monday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Monday2", ViewBag.monday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Monday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Tuesday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Tuesday2", ViewBag.tuesday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Tuesday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Wednesday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Wednesday2", ViewBag.wednesday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Wednesday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Thursday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Thursday2", ViewBag.thursday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Thursday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Friday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Friday2", ViewBag.friday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Friday2)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Saturday2)发车
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.RadioButtonList("Saturday2", ViewBag.saturday2Items as List<SelectListItem>)
+                                    @Html.ValidationMessageFor(model => model.Saturday2)
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+}

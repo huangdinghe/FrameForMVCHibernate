@@ -1,0 +1,109 @@
+﻿@using MvcApp
+@using com.fxm.MVCHibernate.Domain
+@model PageList<com.fxm.MVCHibernate.Domain.CarLineStation>
+
+@{
+    ViewBag.Title = "班车线路停靠站列表";
+}
+
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                班车线路停靠站列表
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="新增" class="btn3" onclick="window.location = '/CarLineStation/Create'" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                    <tr>
+                        <th>
+                            班车
+                        </th>
+                        <th>
+                            线路
+                        </th>
+                        <th>
+                            班别
+                        </th>
+                        <th>
+                            发车时间
+                        </th>
+                        <th>
+                            停靠站
+                        </th>
+                        <th>
+                            到站时间
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="8">
+                                没有满足条件的数据！
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CarLine.Car.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CarLine.Name)
+                                </td>
+                                <td>
+                                    @if (item.CarLine.Shift == 1)
+                                    {
+                                        @: <span>早</span>
+                                    }
+                                    else
+                                    {
+                                        @: <span>晚</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CarLine.CarLineStartTime)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细信息", "Details", new { id = item.ID })|
+                                    @Html.ActionLink("修改", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { onclick = " return confirm('您确定要删除吗?'); " })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pager">
+                    @Html.Raw(Html.Pager(Model.PageIndex, Model.PageSize, Model.TotalCount, Model.PageIndex))
+                </div>
+            </td>
+        </tr>
+    </table>
+}

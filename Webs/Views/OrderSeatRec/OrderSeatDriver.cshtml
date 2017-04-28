@@ -1,0 +1,71 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.CarLine>
+@using com.fxm.MVCHibernate.Domain
+@using MvcApp
+@{
+    ViewBag.Title = "我的行车任务";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IList<OrderSeatRec> hisOrderSeatRec = ViewBag.hisOrderSeatRec as IList<OrderSeatRec>;
+}
+
+<table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 40%; border: 0;">
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">我的行车任务</td>
+    </tr>
+    <tr>
+        <td>
+        @foreach (var item in Model)
+        {
+            Type type = item.GetType();
+            System.Reflection.PropertyInfo propertyInfo1 = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today));
+            System.Reflection.PropertyInfo propertyInfo2 = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today.AddDays(1)));
+            int val1 = (int)propertyInfo1.GetValue(item, null);
+            int val2 = (int)propertyInfo2.GetValue(item, null);
+            <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                <tr>
+                    <td width="30%">班车</td>
+                    <td align="left">@item.Car.Name</td>
+                </tr>
+                <tr>
+                    <td>线路</td>
+                    <td align="left">@item.Name</td>
+                </tr>
+                <tr>
+                    <td>说明</td>
+                    <td align="left">@item.Remark</td>
+                </tr>
+                <tr>
+                    <td>发车</td>
+                    <td align="left">@item.CarLineStartTime</td>
+                </tr>
+                <tr>
+                    <td>今日</td>
+                    <td align="left" style="color:red">
+                        @if (val1 == 0)
+                        {
+                            @: 不发车
+                                            }
+                        else
+                        {
+                            @: 要发车,订座数
+                            @hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID && o.CarDate == DateTime.Today).Count()
+                        }
+                </tr>
+                <tr>
+                    <td>明日</td>
+                    <td align="left" style="color:red">
+                        @if (val2 == 0)
+                        {
+                            @: 不发车
+                                            }
+                        else
+                        {
+                            @: 要发车,数订座
+                            @hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID && o.CarDate == DateTime.Today.AddDays(1)).Count()
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+        </td>
+    </tr>
+</table>

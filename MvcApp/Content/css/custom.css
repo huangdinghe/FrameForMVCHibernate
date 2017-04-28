@@ -1,0 +1,131 @@
+/* CSS Document */
+html{ font-family:"Microsoft YaHei";}
+.fl{ float:left;}
+.fr{ float:right;}
+.cr{ clear:right;}
+.cl{ clear:left;}
+button:focus,input:focus,a,textarea:focus{ outline:none;}
+ul,li,ol{list-style: none;
+    margin: 0;
+    padding: 0;}
+i,em{ font-style:normal;}
+.clears{ clear:both; height:0px; line-height:0px; overflow:hidden; font-size:0px;}
+.mb10{
+    margin-bottom: 10px;
+}
+body,html{
+    background: #eee;
+    color: #333;
+}
+.login_container{
+    padding: 30px  20px;
+}
+.login_title1{
+    font-size: 20px;
+    color: #126995;
+}
+.login_title{
+    font-size: 36px;
+    margin: 0;
+    padding: 0; color: #126995;
+}
+.login_title span{
+    font-size: 20px;
+    color: #e62028;
+}
+.login_title_p{
+    color: #63aace;
+    margin-bottom: 30px;
+}
+.login_body{
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border:1px #e2e2e2 solid;
+    border-radius:10px;
+    box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+.login_copy{
+    color: #aaa;
+}
+
+.navbar-default .navbar-brand{
+    color: #126995;
+}
+.navbar{
+    margin-bottom: 10px;
+}
+.nowp{
+    color: #666;
+    margin-bottom: 10px;
+}
+.nowp a{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #666;
+}
+.dingzuo{
+    margin-bottom: 20px;
+}
+.dingzuo h2{
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-left:5px #e62028 solid;
+    padding-left: 10px;
+}
+.info_table{
+    font-size: 14px;
+}
+.info_table td{
+    border:1px #ddd solid;
+    padding: 10px;
+    background: #ffffff;
+}
+.pwd_table td{
+    padding: 10px;
+    background: #ffffff;
+}
+.pwd_table{
+    border:1px #e2e2e2 solid;
+}
+.banche_add li{
+    color: #333;
+}
+.banche_add span{
+    white-space: nowrap;
+    color: #666;
+    margin-right: 10px;
+}
+.zhanwei{
+    height: 55px;
+    margin-bottom: 10px;
+}
+.zuowei{
+    margin-right: 10px;
+}
+.alert{
+    margin-bottom: 10px;
+}
+.xinxi{
+    line-height: 20px;
+}
+.xinxi .xx{
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.d_n{
+    display: none;
+}
+.mimagenggai{
+    padding: 20px;
+    background: #ffffff;
+}
+.mimagenggai p{
+    font-size: 18px;
+}

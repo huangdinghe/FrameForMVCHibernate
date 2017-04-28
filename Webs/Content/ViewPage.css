@@ -1,0 +1,89 @@
+﻿.dataGrid
+{
+    border: 1px solid #157fa8;
+   /* background-color: #DFF2FF;*/
+    width:100%;
+}
+
+.dataGrid th
+{
+    color: #007ea2;
+    background-color: #caeefe;
+    border-bottom:1px solid #157fa8;
+    height: 30px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.dataGrid tr:hover
+{
+    background-color: #f0f0f0;
+}
+.dataGrid td
+{
+    border-bottom: 1px solid #D4D0C8;
+    height: 25px;
+    text-align: center;
+    padding: 0 5px 0 5px;
+    font-size: 9pt;
+}
+
+.pager    
+{    
+    font-size: 12px;    
+    margin: 8px 0;    
+    padding: 3px 0 3px;    
+    text-align:right;
+}    
+   
+.pager .current    
+{    
+    background-color: #06c;    
+    border: 1px solid #009;    
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 26px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;    
+}    
+   
+.pager a    
+{
+    border: 1px solid #9AAFE5;
+    display: inline-block;
+    line-height: 26px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;    
+    text-decoration: none;    
+    color: #2E6AB1;    
+}    
+   
+.pager .pagerInput    
+{    
+
+    border: 1px solid #9AAFE5;    
+    text-align: center;    
+    text-decoration: none;    
+    height: 26px;
+    line-height: 26px;
+    width: 30px;    
+}    
+
+.pager .pagerButton    
+{    
+    border: 1px solid #9AAFE5;    
+    cursor: pointer;    
+} 
+
+.tableEdit
+{
+    background-color:lightblue;
+}
+
+.tableEdit td
+{
+    background-color:White;
+} 

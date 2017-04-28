@@ -1,0 +1,62 @@
+﻿@using com.fxm.MVCHibernate.Domain
+@model com.fxm.MVCHibernate.Domain.Car
+
+@{
+    ViewBag.Title = "班车详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.jqprint.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    function PrintPage() {
+        $("#printDiv").jqprint();
+    }
+</script>
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style=" text-align:center;vertical-align:middle">
+                班车详细信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location='/Car/Index?pageIndex=1'" />
+                <input type="button" value="打印" class="btn3" onclick="PrintPage()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="printDiv">
+                    <fieldset>
+                        <legend>班车</legend>
+                        <div class="display-label">班车</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.Name)</div>
+                        <div class="display-label">车牌</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.PlateNumber)</div>
+                        <div class="display-label">座位数</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.SeatCount)</div>
+                        <div class="display-label">司机</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.Driver.Name)</div>
+                        <div class="display-label">司机电话</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.Driver.Tel)</div>
+                        <div class="display-label">状态</div>
+                        <div class="display-field">
+                            @if (Model.Status == 1)
+                            {
+                                @: 停运
+                            }
+                            else
+                            {
+                                @: 正常
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+            </td>
+        </tr>
+    </table>
+}

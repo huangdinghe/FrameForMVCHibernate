@@ -1,0 +1,20 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<tree id="0">
+  <item text="系统管理" id="1" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif" open="1">
+    <item text="菜单管理" id="2" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="用户管理" id="3" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="角色管理" id="4" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="更改密码" id="5" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+  </item>
+  <item text="业务管理" id="6" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif" open="1">
+    <item text="班车管理" id="7" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="线路管理" id="8" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="停靠站管理" id="9" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+    <item text="订座记录管理" id="10" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif"/>
+  </item>
+  <item text="功能菜单" id="11" im0="book_titel.gif" im1="book.gif" im2="book_titel.gif" open="1">
+    <item text="订座" id="12" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif"/>
+    <item text="我的乘车记录" id="13" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif"/>
+    <item text="更改密码" id="14" im0="book_titel.gif" im1="book_titel.gif" im2="book_titel.gif"/>
+  </item>
+</tree>

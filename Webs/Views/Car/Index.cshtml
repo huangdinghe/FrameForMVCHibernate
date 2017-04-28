@@ -1,0 +1,117 @@
+﻿@using MvcApp
+@using com.fxm.MVCHibernate.Domain
+@model PageList<com.fxm.MVCHibernate.Domain.Car>
+
+@{
+    ViewBag.Title = "班车列表";
+}
+
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                班车列表
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="新增" class="btn3" onclick="window.location='/Car/Create'" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                    <tr>
+                        <th>
+                            班车
+                        </th>
+                        <th>
+                            车牌
+                        </th>
+                        <th>
+                            座位数
+                        </th>
+                        <th>
+                            司机
+                        </th>
+                        <th>
+                            司机电话
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="7">
+                                没有满足条件的数据！
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PlateNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SeatCount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Driver.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Driver.Tel)
+                                </td>
+                                <td>
+                                    @if (item.Status == 1)
+                                    {
+                                        @: <span>停运</span>
+                                    }
+                                    else
+                                    {
+                                        @: <span>正常</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细信息", "Details", new { id = item.ID })|
+                                    @Html.ActionLink("修改", "Edit", new { id = item.ID }) |
+                                    @if (item.Status == 0)
+                                    {
+                                        @Html.ActionLink("停运", "SwitchStatus", new { id = item.ID }, new { onclick = "return confirm('真的打算停运吗?')" });
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("启用", "SwitchStatus", new { id = item.ID }, new { onclick = "return confirm('真的打算启用吗?')" });
+                                    }
+                                    |
+                                    @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { onclick = " return confirm('您确定要删除吗?'); " })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="pager">
+                    @Html.Raw(Html.Pager(Model.PageIndex, Model.PageSize, Model.TotalCount, Model.PageIndex))
+                </div>
+            </td>
+        </tr>
+    </table>
+}

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.OrderSeatRec>
+
+@{
+    ViewBag.Title = "我的订座记录(手机版)";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+<!-- 导航 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重庆惠科金渝光电班车订座系统 </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/IndexMobile">首页</a></li>
+                <li><a href="/OrderSeatRec/CarListForOrder">订座</a></li>
+                <li><a href="/OrderSeatRec/QryPersonal">我的乘车记录</a></li>
+                <li class="active"><a href="/SysUser/ChangePassword">更改密码</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航 end -->
+<!-- 占位空间 -->
+<div class="zhanwei"></div>
+<!-- 占位空间 end -->
+<!-- 面包屑导航 -->
+<div class="container-fluid nowp">
+    <a href="/Home/IndexMobile">首页</a>
+    <a href="/OrderSeatRec/CarListForOrder">订座</a>
+    <a href="/OrderSeatRec/QryPersonal">我的乘车记录</a>
+    <a href="/SysUser/ChangePassword">更改密码</a>
+</div>
+<!-- 面包屑导航 end -->
+<!-- 内容部分 -->
+<div class="container-fluid">
+    <div class="dingzuo">
+        <h2>我的乘车记录</h2>
+        <div class="alert alert-info xinxi">
+            <div class="xx xinxi_x" style="height:100%">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="30%">班车：</td>
+                                <td align="left">@item.Car.Name</td>
+                            </tr>
+                            <tr>
+                                <td>车牌号</td>
+                                <td align="left">@item.Car.PlateNumber</td>
+                            </tr>
+                            <tr>
+                                <td>线路</td>
+                                <td align="left">@item.CarLine.Name</td>
+                            </tr>
+                            <tr>
+                                <td>发车时间</td>
+                                <td align="left">@item.StartTime.ToString("yyyy-MM-dd HH:mm")</td>
+                            </tr>
+                            <tr>
+                                <td>订座时间</td>
+                                <td align="left">@item.OrderTime.ToString("yyyy-MM-dd HH:mm")</td>
+                            </tr>
+                            <tr>
+                                <td>座号</td>
+                                <td align="left">@item.SeatNumber.ToString("00") 座</td>
+                            </tr>
+                        </table>
+                    }
+                }
+                else
+                {
+                    @: （无）
+                }
+            </div>
+        </div>
+        <div class="text-center">
+            <p class="text-center login_copy">
+                重庆工程学院·版权所有
+                <br>
+                重庆惠科金渝光电 重庆市巴南区界石镇数码产业园
+            </p>
+        </div>
+    </div>
+</div>
+<!-- 内容部分 end -->
+

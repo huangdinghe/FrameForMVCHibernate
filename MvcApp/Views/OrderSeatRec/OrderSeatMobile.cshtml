@@ -1,0 +1,180 @@
+﻿@model com.fxm.MVCHibernate.Domain.CarLine
+@using com.fxm.MVCHibernate.Domain
+@{
+    ViewBag.Title = "乘客订座(手机版)";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    IList<OrderSeatRec> hisOrderSeatRec = ViewBag.hisOrderSeatRec as IList<OrderSeatRec>;
+    DateTime carDate = ViewBag.carDate;
+    string msg = ViewBag.msg;
+
+    IList<OrderSeatRec> personal = hisOrderSeatRec.Where(m => m.OrderPerson.LoginCode == MvcApp.AppHelper.LoginedUser.LoginCode).ToList();
+}
+@if (msg.Length > 0)
+{
+    <script>
+        alert('@msg ');
+    </script>
+}
+
+<!-- 导航 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重庆惠科金渝光电班车订座系统 </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/IndexMobile">首页</a></li>
+                <li class="active"><a href="/OrderSeatRec/CarListForOrder">订座</a></li>
+                <li><a href="/OrderSeatRec/QryPersonal">我的乘车记录</a></li>
+                <li><a href="/SysUser/ChangePassword">更改密码</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航 end -->
+<!-- 占位空间 -->
+<div class="zhanwei"></div>
+<!-- 占位空间 end -->
+<!-- 面包屑导航 -->
+<div class="container-fluid nowp">
+    <a href="/Home/IndexMobile">首页</a>
+    <a href="/OrderSeatRec/CarListForOrder">订座</a>
+    <a href="/OrderSeatRec/QryPersonal">我的乘车记录</a>
+    <a href="/SysUser/ChangePassword">更改密码</a>
+</div>
+<!-- 面包屑导航 end -->
+<!-- 内容部分 -->
+<div class="container-fluid">
+    <div class="dingzuo">
+        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="30%" valign="top">班车</td>
+                <td align="left" valign="top">@Model.Car.Name</td>
+            </tr>
+            <tr>
+                <td valign="top">线路</td>
+                <td align="left" valign="top">@Model.Name</td>
+            </tr>
+            <tr>
+                <td valign="top">线路说明</td>
+                <td align="left" valign="top">@Model.Remark</td>
+            </tr>
+            <tr>
+                <td valign="top">班次</td>
+                <td align="left" valign="top">
+                    @if (Model.Shift == 1)
+                    {
+                        <span>早班</span>
+                    }
+                    else
+                    {
+                        <span>晚班</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">发车时间</td>
+                <td align="left" valign="top">@carDate.ToString("yyyy-MM-dd") @Model.CarLineStartTime</td>
+            </tr>
+            <tr>
+                <td valign="middle">停靠站</td>
+                <td align="left" valign="top">
+                    <table border="1">
+                        @foreach (var station in Model.CarLineStationList.OrderBy(o => o.ArrivalTime).ToList())
+                        {
+                            <tr>
+                                <td>@station.ArrivalTime</td>
+                                <td>@station.Name</td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">已订座</td>
+                <td align="left" valign="top">@hisOrderSeatRec.Count()</td>
+            </tr>
+            <tr>
+                <td valign="top">您的订座</td>
+                <td align="left" valign="top">
+                    @{
+                        
+                        if (personal.Count > 0)
+                        {
+                            @personal[0].SeatNumber.ToString("00")
+                            @: 座
+                            @Html.ActionLink("退订", "UnOrder", new { id = personal[0].ID, carId = personal[0].Car.ID, carDate = carDate, StartTime = personal[0].StartTime }, new { onclick = "return confirm('真的打算退订吗?')", @class = "btn btn-primary btn-success" })
+                        }
+                        else
+                        {
+                            @: (无)
+                        }
+                    }
+                </td>
+            </tr>
+            
+        </table>
+</div>
+    <div class="dingzuo">
+        <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="2" align="center">
+                    司机位置
+                </td>
+            </tr>
+            @for (int i = 1; i <= Model.Car.SeatCount; i = i + 2)
+            {
+                <tr>
+                    @for (int col = 0; col <= 1; col++)
+                    {
+                        int seatnumber = col + i;
+                        if (seatnumber <= Model.Car.SeatCount)
+                        {
+                            List<OrderSeatRec> lst = hisOrderSeatRec.Where(o => o.SeatNumber == seatnumber).ToList();
+                            if (lst.Count > 0)
+                            {
+                                <td width="50%" valign="top" align="center">
+                                    <span class="zuowei">
+                                        @seatnumber.ToString("00")
+                                        @lst[0].OrderPerson.LoginCode
+                                    </span>
+                                </td>
+                            }
+                            else
+                            {
+                                <td width="50%" valign="top" align="center">
+                                    <span class="zuowei">
+                                        @seatnumber.ToString("00")
+                                        @Html.ActionLink("订座", "Order", new { id = Model.ID, seatNumber = seatnumber, carId = Model.Car.ID, carDate = carDate, carLineStartTime = Model.CarLineStartTime, shift = Model.Shift }, new { @class = "btn btn-primary btn-sm" })
+                                    </span>
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td>&nbsp;</td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <!-- 订座信息 end -->
+    <div class="text-center">
+        <p class="text-center login_copy">
+            重庆工程学院·版权所有
+            <br>
+            重庆惠科金渝光电 重庆市巴南区界石镇数码产业园
+        </p>
+    </div>
+</div>
+<!-- 内容部分 end -->
+

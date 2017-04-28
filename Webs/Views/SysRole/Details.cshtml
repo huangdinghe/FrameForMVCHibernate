@@ -1,0 +1,74 @@
+﻿@model com.fxm.MVCHibernate.Domain.SysRole
+@{
+    ViewBag.Title = "角色详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <div id="EditRoleModuleIDs" style="display: none;">@ViewBag.EditRoleModuleIDs</div>
+    <div id="EditRoleUserIDs" style="display: none;">@ViewBag.EditRoleUserIDs</div>
+}
+<link href="@Url.Content("~/Content/dhtmlxtree.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/dhtmlxcommon.js")" type="text/javascript" language="javascript"></script>
+<script src="@Url.Content("~/Scripts/dhtmlxtree.js")" type="text/javascript" language="javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.jqprint.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        tree = new dhtmlXTreeObject("index_tree", "100%", "100%", 0);
+        tree.setSkin('dhx_skyblue');
+        tree.setImagePath("../../Content/Img/csh_bluebooks/");
+        tree.enableCheckBoxes(1);
+        tree.enableThreeStateCheckboxes(true);
+        tree.loadXML("../../Content/menu.xml");
+
+        //设置初始值
+        tree.attachEvent("onXLE", function (tree, id) {
+            //编辑角色的权限
+            var arrEditModuleId = $("#EditRoleModuleIDs").html().split(",");
+            var childlessIds = "," + tree.getAllChildless() + ",";
+            for (var i = 0; i < arrEditModuleId.length; i++) {
+                if (childlessIds.indexOf("," + arrEditModuleId[i] + ",") >= 0) {
+                    tree.setCheck(arrEditModuleId[i], true);
+                }
+            }
+        });
+    });
+    function PrintPage() {
+        $("#printDiv").jqprint();
+    }
+</script>
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                角色详细信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location='/SysRole/Index?pageIndex=1'" />
+                <input type="button" value="打印" class="btn3" onclick="PrintPage()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="printDiv" name="printDiv">
+                    <fieldset>
+                        <legend>角色</legend>
+                        <div class="display-label">@Html.LabelFor(model => model.Name)</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.Name)</div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>角色权限</legend>
+                        <div id="index_tree" style="width: 300px; border: 1px solid Silver; overflow: auto;
+                            display:block">
+                        </div>
+                    </fieldset>
+                </div>
+            </td>
+        </tr>
+    </table>
+}

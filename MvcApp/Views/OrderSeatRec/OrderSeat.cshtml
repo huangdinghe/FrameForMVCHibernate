@@ -1,0 +1,101 @@
+﻿@model com.fxm.MVCHibernate.Domain.CarLine
+@using com.fxm.MVCHibernate.Domain
+@{
+    ViewBag.Title = "乘客订座";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IList<OrderSeatRec> hisOrderSeatRec = ViewBag.hisOrderSeatRec as IList<OrderSeatRec>;
+    DateTime carDate = ViewBag.carDate;
+    string msg = ViewBag.msg;
+}
+@if (msg.Length > 0)
+{
+    <script>
+        alert('@msg ');
+    </script>
+}
+<table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 40%; border: 0;">
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">线路列表</td>
+    </tr>
+    <tr>
+        <td>
+            <div id="printDiv">
+                <fieldset>
+                    <legend>@Model.Car.Name @Model.Name</legend>
+                    <div class="display-label">线路说明</div>
+                    <div class="display-field">@Model.Remark</div>
+                    <div class="display-label">班次</div>
+                    <div class="display-field">
+                        @if (Model.Shift == 1)
+                        {
+                            <span>早班</span>
+                        }
+                        else
+                        {
+                            <span>晚班</span>
+                        }
+                    </div>
+                    <div class="display-label">发车时间</div>
+                    <div class="display-field">@carDate.ToString("yyyy-MM-dd") @Model.CarLineStartTime</div>
+                    <div class="display-label">停靠站</div>
+                    <div class="display-field">
+                        <table border="1">
+                            @foreach (var station in Model.CarLineStationList.OrderBy(o => o.ArrivalTime).ToList())
+                            {
+                                <tr>
+                                    <td>@station.ArrivalTime</td>
+                                    <td>@station.Name</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <div class="display-label">已订座</div>
+                    <div class="display-field">@hisOrderSeatRec.Count()</div>
+                    <div class="display-label">&nbsp;</div>
+                    <div class="display-field">
+                        <table border="1" class="dataGrid">
+                            <tr>
+                                <td colspan="2">司机座位</td>
+                            </tr>
+                            @for (int i = 1; i <= Model.Car.SeatCount; i = i + 2)
+                            {
+                                <tr>
+                                    @for (int col = 0; col <= 1; col++)
+                                    {
+                                        int seatnumber = col + i;
+                                        if (seatnumber <= Model.Car.SeatCount)
+                                        {
+                                            List<OrderSeatRec> lst = hisOrderSeatRec.Where(o => o.SeatNumber == seatnumber).ToList();
+                                            if (lst.Count > 0)
+                                            {
+                                                <td>
+                                                    @seatnumber.ToString("00")
+                                                    @lst[0].OrderPerson.LoginCode
+                                                    @if (lst[0].OrderPerson.LoginCode==MvcApp.AppHelper.LoginedUser.LoginCode)
+                                                    {
+                                                        @Html.ActionLink("退订", "UnOrder", new { id = lst[0].ID, carId = Model.Car.ID, carDate = carDate, StartTime = lst[0].StartTime }, new { onclick = "return confirm('真的打算退订吗?')", @class = "btn3" })
+                                                    }
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @seatnumber.ToString("00")
+                                                    @Html.ActionLink("订座", "Order", new { id = Model.ID, seatNumber = seatnumber, carId = Model.Car.ID, carDate = carDate, carLineStartTime = Model.CarLineStartTime, shift = Model.Shift }, new { @class = "btn3" })
+                                                </td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td>&nbsp;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </td>
+    </tr>
+</table>

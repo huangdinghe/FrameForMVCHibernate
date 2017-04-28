@@ -1,0 +1,89 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.CarLine>
+@{
+    ViewBag.Title = "订座-线路列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+    <tr>
+        <td class="contentPageTitle" style="text-align: center; vertical-align: middle">线路列表</td>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="2">无线路</td>
+        </tr>
+    }
+    <tr>
+        <td>
+            @foreach (var item in Model)
+            {
+                <div id="printDiv">
+                    <fieldset>
+                        <legend>@item.Car.Name @item.Name</legend>
+                        <div class="display-label">线路说明</div>
+                        <div class="display-field">@item.Remark</div>
+                        <div class="display-label">班次</div>
+                        <div class="display-field">
+                            @if (item.Shift == 1)
+                            {
+                                <span>早班</span>
+                            }
+                            else
+                            {
+                                <span>晚班</span>
+                            }
+                        </div>
+                        <div class="display-label">发车时间</div>
+                        <div class="display-field">@item.CarLineStartTime</div>
+                        <div class="display-label">停靠站</div>
+                        <div class="display-field">
+                            <table border="1">
+                                @foreach (var station in item.CarLineStationList.OrderBy(o => o.ArrivalTime).ToList())
+                                {
+                                    <tr>
+                                        <td>@station.ArrivalTime</td>
+                                        <td>@station.Name</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="display-label">&nbsp;</div>
+                        <div class="display-field">
+                            @{
+                                Type type = item.GetType();
+                                System.Reflection.PropertyInfo propertyInfo = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today));
+                                int val = (int)propertyInfo.GetValue(item, null);
+                                if (val == 0)
+                                {
+                                    <span>今日不发车</span>
+                                }
+                                else
+                                {
+                                    if (DateTime.Now > Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd") + " " + item.CarLineStartTime))
+                                    {
+                                        <span>今日已发车</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@Html.ActionLink("订今日座", "OrderSeat", new { date = DateTime.Today, lineId = item.ID }, new { @class = "btn3" })</span>
+                                    }
+                                }
+                                propertyInfo = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today.AddDays(1)));
+                                val = (int)propertyInfo.GetValue(item, null);
+                                if (val == 0)
+                                {
+                                    <span>明日不发车</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.ActionLink("订明日座", "OrderSeat", new { date = DateTime.Today.AddDays(1), lineId = item.ID }, new { @class = "btn3" })</span>
+                                }
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+            }
+            </td>
+        </tr>
+</table>

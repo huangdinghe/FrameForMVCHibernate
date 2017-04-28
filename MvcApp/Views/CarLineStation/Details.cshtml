@@ -1,0 +1,68 @@
+﻿@model com.fxm.MVCHibernate.Domain.CarLineStation
+
+@{
+    ViewBag.Title = "班车线路停靠站详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.jqprint.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    function PrintPage() {
+        $("#printDiv").jqprint();
+    }
+</script>
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style=" text-align:center;vertical-align:middle">
+                停靠站详细信息
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="返回列表" class="btn6" onclick="window.location = '/CarLineStation/Index?pageIndex=1'" />
+                <input type="button" value="打印" class="btn3" onclick="PrintPage()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="printDiv">
+                    <fieldset>
+                        <legend>停靠站</legend>
+                        <div class="display-label">班车</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.CarLine.Car.Name)</div>
+                        <div class="display-label">线路</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.CarLine.Name)</div>
+                        <div class="display-label">线路说明</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.CarLine.Remark)</div>
+                        <div class="display-label">发车时间</div>
+                        <div class="display-field">@Html.DisplayFor(model => model.CarLine.CarLineStartTime)</div>
+                        <div class="display-label">班别</div>
+                        <div class="display-field">
+                            @if (Model.CarLine.Shift == 1)
+                            {
+                                @: 早
+                            }
+                            else
+                            {
+                                @: 晚
+                            }
+                        </div>
+                        <div class="display-label">停靠站</div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                        <div class="display-label">到站时间</div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.ArrivalTime)
+                        </div>
+                    </fieldset>
+                </div>
+            </td>
+        </tr>
+    </table>
+}

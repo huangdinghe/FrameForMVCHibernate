@@ -1,0 +1,114 @@
+﻿body
+{
+    background:#3997c0   url("Img/login_bg.png") repeat-x;
+}
+.divMain
+{
+    padding-top: 130px;
+    width:750px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.divLoginArea
+{
+    width: 750px;
+    height:390px;
+}
+
+.divMain000
+{
+    background: url("Img/login_title.png") bottom center no-repeat;
+    height: 73px;
+
+}
+.divInput
+{
+    width: 440px;
+    padding-top: 60px;
+    font-size: 16px;
+}
+
+.divAccount
+{
+    float: right;
+}
+
+.divPassword
+{
+    width: 250px;
+    height: 208px;
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+    background: url(Img/login_left.png) no-repeat;
+}
+.divBottom
+{
+    margin: auto;
+    clear: both;
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+.divButton{
+    padding-left: 75px;
+}
+.divLoginLine
+{
+    padding-top:5px;
+    padding-bottom: 16px;
+}
+.divButton .btn3{
+    width: 333px;
+    height: 38px;
+    line-height: 38px;
+    color:#fff;
+    background: #3997c0;
+    text-align: center;
+    padding: 0;
+    border-radius:10px;
+    border:1px #157fa8 solid;
+    transition: all 0.2s;
+}
+.divButton .btn3:hover{
+    background: #4db4e1;
+}
+.divNotice{
+    clear: both;
+    font-size: 14px;
+    padding-top: 10px;
+    width: 332px;
+}
+.divWords
+{
+    color:#fff;
+}
+.divLabel
+{
+    background-color: Yellow;
+    height: 20px;
+    text-align: center;
+}
+
+input.textBox
+{
+    border:solid 1px #BDBDBD;
+    height:36px;
+    line-height: 36px;
+    font-size: 14px;
+    color:#666;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius:10px;
+    width: 300px;
+    margin-left: 10px;
+}
+input.textBox:focus{
+    border:1px #f6ba12 solid;
+}
+
+.divErrorMsg
+{
+    height:20px;
+    }

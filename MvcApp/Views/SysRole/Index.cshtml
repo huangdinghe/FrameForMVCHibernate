@@ -1,0 +1,64 @@
+﻿@using MvcApp
+@model IEnumerable<com.fxm.MVCHibernate.Domain.SysRole>
+
+@{
+    ViewBag.Title = "角色列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <table cellspacing="0" cellpadding="0" style="vertical-align: top; width: 100%; border: 0;">
+        <tr>
+            <td class="contentPageTitle" style="text-align: center; vertical-align: middle">
+                角色列表
+            </td>
+        </tr>
+        <tr>
+            <td class="titleContentDivider"></td>
+        </tr>
+        <tr>
+            <td height="30">
+                <input type="button" value="新增" class="btn3" onclick="window.location='/SysRole/Create'" />
+                角色名: @Html.TextBox("roleName")<input type="submit" value="查询" class="btn3" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" border="1" class="dataGrid">
+                    <tr>
+                        <th>
+                            名称
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @if (Model == null || Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">
+                                没有满足条件的数据！
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细信息", "Details", new { id = item.ID })|
+                                    @Html.ActionLink("修改", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("删除", "Delete", new { id = item.ID }, new { onclick = " return confirm('您确定要删除吗?'); " })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+    </table>
+}

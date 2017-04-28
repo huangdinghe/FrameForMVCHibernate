@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <components>
+    <component id="ServiceCar" 
+               service="com.fxm.MVCHibernate.Service.IServiceCar, com.fxm.MVCHibernate.Service" 
+               type="com.fxm.MVCHibernate.Component.ComponentCar, com.fxm.MVCHibernate.Component" 
+               isTransactional="true">
+    </component>
+    <component id="ServiceCarLine"
+               service="com.fxm.MVCHibernate.Service.IServiceCarLine, com.fxm.MVCHibernate.Service"
+               type="com.fxm.MVCHibernate.Component.ComponentCarLine, com.fxm.MVCHibernate.Component"
+               isTransactional="true">
+    </component>
+    <component id="ServiceCarLineStation"
+               service="com.fxm.MVCHibernate.Service.IServiceCarLineStation, com.fxm.MVCHibernate.Service"
+               type="com.fxm.MVCHibernate.Component.ComponentCarLineStation, com.fxm.MVCHibernate.Component"
+               isTransactional="true">
+    </component>
+    <component id="ServiceOrderSeatRec"
+               service="com.fxm.MVCHibernate.Service.IServiceOrderSeatRec, com.fxm.MVCHibernate.Service"
+               type="com.fxm.MVCHibernate.Component.ComponentOrderSeatRec, com.fxm.MVCHibernate.Component"
+               isTransactional="true">
+    </component>
+    <component id="ServiceSysUser"
+           service="com.fxm.MVCHibernate.Service.IServiceSysUser, com.fxm.MVCHibernate.Service"
+           type="com.fxm.MVCHibernate.Component.ComponentSysUser, com.fxm.MVCHibernate.Component"
+           isTransactional="true">
+    </component>
+    <component id="ServiceSysRole"
+           service="com.fxm.MVCHibernate.Service.IServiceSysRole, com.fxm.MVCHibernate.Service"
+           type="com.fxm.MVCHibernate.Component.ComponentSysRole, com.fxm.MVCHibernate.Component"
+           isTransactional="true">
+    </component>
+    <component id="ServiceSysMenu"
+           service="com.fxm.MVCHibernate.Service.IServiceSysMenu, com.fxm.MVCHibernate.Service"
+           type="com.fxm.MVCHibernate.Component.ComponentSysMenu, com.fxm.MVCHibernate.Component"
+           isTransactional="true">
+    </component>
+
+  </components>
+</configuration>

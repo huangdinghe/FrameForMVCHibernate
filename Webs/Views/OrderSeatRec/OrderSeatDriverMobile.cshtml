@@ -1,0 +1,111 @@
+﻿@model IEnumerable<com.fxm.MVCHibernate.Domain.CarLine>
+@using com.fxm.MVCHibernate.Domain
+@using MvcApp
+@{
+    ViewBag.Title = "我的行车任务";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    IList<OrderSeatRec> hisOrderSeatRec = ViewBag.hisOrderSeatRec as IList<OrderSeatRec>;
+}
+<!-- 导航 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">重庆惠科金渝光电班车订座系统 </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/Home/IndexDriverMobile">首页</a></li>
+                <li><a href="/OrderSeatRec/OrderSeatDriver">我的行车任务</a></li>
+                <li><a href="/OrderSeatRec/QryPersonalDriver">我的行车记录</a></li>
+                <li class="active"><a href="/SysUser/ChangePassword">更改密码</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 导航 end -->
+<!-- 占位空间 -->
+<div class="zhanwei"></div>
+<!-- 占位空间 end -->
+<!-- 面包屑导航 -->
+<div class="container-fluid nowp">
+    <a href="/Home/IndexDriverMobile">首页</a>
+    <a href="/OrderSeatRec/OrderSeatDriver">我的行车任务</a>
+    <a href="/OrderSeatRec/QryPersonalDriver">我的行车记录</a>
+    <a href="/SysUser/ChangePassword">更改密码</a>
+</div>
+<!-- 面包屑导航 end -->
+<div class="container-fluid">
+    <h2>我的行车任务</h2>
+    @foreach (var item in Model)
+    {
+        Type type = item.GetType();
+        System.Reflection.PropertyInfo propertyInfo1 = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today));
+        System.Reflection.PropertyInfo propertyInfo2 = type.GetProperty(MvcApp.AppHelper.GetFieldNameByDay(DateTime.Today.AddDays(1)));
+        int val1 = (int)propertyInfo1.GetValue(item, null);
+        int val2 = (int)propertyInfo2.GetValue(item, null);
+        
+        <div class="dingzuo">
+            <table width="100%" class="info_table mb10" cellpadding="0" cellspacing="0" align="center">
+                <tr>
+                    <td width="30%">班车</td>
+                    <td align="left">@item.Car.Name</td>
+                </tr>
+                <tr>
+                    <td>线路</td>
+                    <td align="left">@item.Name</td>
+                </tr>
+                <tr>
+                    <td>说明</td>
+                    <td align="left">@item.Remark</td>
+                </tr>
+                <tr>
+                    <td>发车</td>
+                    <td align="left">@item.CarLineStartTime</td>
+                </tr>
+                <tr>
+                    <td>今日</td>
+                    <td align="left" style="color:red">
+                        @if (val1 == 0)
+                        {
+                            @: 不发车
+                                            }
+                        else
+                        {
+                            @: 要发车,订座数
+                            @hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID && o.CarDate == DateTime.Today).Count()
+                        }
+                </tr>
+                <tr>
+                    <td>明日</td>
+                    <td align="left" style="color:red">
+                        @if (val2 == 0)
+                        {
+                            @: 不发车
+                                            }
+                        else
+                        {
+                            @: 要发车,数订座
+                            @hisOrderSeatRec.Where(o => o.CarLine.ID == item.ID && o.CarDate == DateTime.Today.AddDays(1)).Count()
+                        }
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    }
+    <div class="text-center">
+        <p class="text-center login_copy">
+            重庆工程学院·版权所有
+            <br>
+            重庆惠科金渝光电 重庆市巴南区界石镇数码产业园
+        </p>
+    </div>
+</div>
+
