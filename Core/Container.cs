@@ -8,7 +8,7 @@ namespace com.fxm.MVCHibernate.Core
     public sealed class Container
     {
         /// <summary>
-        /// 拦截器 
+        /// 定义拦截器 
         /// </summary>
         private XmlInterpreter interpreter;
         /// <summary>
